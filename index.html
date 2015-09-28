@@ -61,11 +61,11 @@
 </main>
 
 <div class="overlay-container invisible">
-  <form class="overlay review-form" action="index.html" method="post">
+  <form id="review-form" class="overlay review-form" action="index.html" method="post">
     <h2 class="review-form-title">Оставить отзыв</h2>
     <span class="review-form-close">&times;</span>
 
-    <fieldset class="review-form-group review-form-group-mark">
+    <fieldset id="form-mark" class="review-form-group review-form-group-mark">
       <span class="review-form-label">Оценка</label><br>
       <input type="radio" name="review-mark" id="review-mark-1" value="1"><label class="review-mark-label review-mark-label-1" for="review-mark-2">1</label>
       <input type="radio" name="review-mark" id="review-mark-2" value="2"><label class="review-mark-label review-mark-label-2" for="review-mark-2">2</label>
@@ -74,7 +74,7 @@
       <input type="radio" name="review-mark" id="review-mark-5" value="5"><label class="review-mark-label review-mark-label-5" for="review-mark-5">5</label>
     </fieldset>
 
-    <fieldset class="review-form-group">
+    <fieldset id="form-fields" class="review-form-group">
       <label for="review-name" class="review-form-label">Имя</label><br>
       <input type="text" name="review-name" id="review-name" class="review-form-field review-form-field-name">
     </fieldset>
@@ -85,16 +85,17 @@
     </fieldset>
 
     <div class="review-form-controls">
-      <button class="review-form-control review-submit" type="submut">Добавить отзыв</button>
+      <button class="review-form-control review-submit" type="submit">Добавить отзыв</button>
       <div class="review-form-control review-fields">
         Осталось заполнить:<br>
-        <label for="review-name" class="review-fields-label review-fields-name">имя</label>
-        <label for="review-text" class="review-fields-label review-fields-text">отзыв</label>
+        <label for="review-name" id="label-name" class="review-fields-label review-fields-name">имя</label>
+        <label for="review-text" id="label-text" class="review-fields-label review-fields-text">отзыв</label>
       </div>
     </div>
   </form>
 </div>
 
+<<<<<<< HEAD
 <template id="review-template">
   <article class="review">
     <img src="" class="review-author" alt="" title="" />
@@ -108,7 +109,12 @@
   </article>
 </template>
 
+=======
+>>>>>>> origin/master
 <script src="js/form.js"></script>
-
+<script src="js/cookies.js"></script>>
+<script src="js/form-validate.js"></script>
+<script src="data/reviews.js"></script>
+<script src="js/reviews.js"></script>
 </body>
 </html>
