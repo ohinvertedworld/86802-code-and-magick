@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <link href='https://fonts.googleapis.com/css?family=PT+Mono&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
+  <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
   <title>Code and Magick</title>
 </head>
 <body>
@@ -38,7 +40,7 @@
   <section class="main-section reviews">
     <h2 class="section-title reviews-title">Отзывы</h2>
 
-    <form class="reviews-filter" action="index.html" method="get">
+    <form class="reviews-filter" id="reviews-filter" action="index.html" method="get">
       <input type="radio" name="reviews" id="reviews-all" value="reviews-all" checked><label for="reviews-all" class="reviews-filter-item"> Все</label>
       <input type="radio" name="reviews" id="reviews-recent" value="reviews-recent"><label for="reviews-recent" class="reviews-filter-item"> Недавние</label>
       <input type="radio" name="reviews" id="reviews-good" value="reviews-good"><label for="reviews-good" class="reviews-filter-item"> Хорошие</label>
@@ -95,7 +97,6 @@
   </form>
 </div>
 
-<<<<<<< HEAD
 <template id="review-template">
   <article class="review">
     <img src="" class="review-author" alt="" title="" />
@@ -109,12 +110,10 @@
   </article>
 </template>
 
-=======
->>>>>>> origin/master
 <script src="js/form.js"></script>
 <script src="js/cookies.js"></script>>
 <script src="js/form-validate.js"></script>
 <script src="data/reviews.js"></script>
-<script src="js/reviews.js"></script>
+<script src="js/reviews-display.js"></script>
 </body>
 </html>
