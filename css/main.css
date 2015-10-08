@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: 'pixel_cyrnormal';
   src: url('../fonts/rlragd94-webfont.eot');
@@ -27,9 +26,7 @@ body {
 
 h1,
 h2 {
-  font-family: 'Pixel Cyr';
   font-family: 'pixel_cyrnormal';
-  font-family: 'Pixel Cyr';
   text-align: center;
   text-shadow: 5px 5px 0 rgba(0, 0, 0, 0.72);
 }
@@ -70,15 +67,10 @@ header {
 .header-soon {
   color: #fff;
   color: rgba(255, 255, 255, 0.6);
-  font-family: 'Pixel Cyr';
-  font-size: 26px;
-
   font-family: 'pixel_cyrnormal';
   font-size: 26px;
   position: relative;
   z-index: 1;
-  font-family: 'Pixel Cyr';
-  font-size: 26px;
 }
 
 .header-title {
@@ -190,6 +182,24 @@ input[type=radio]:checked + .reviews-filter-item {
   margin-bottom: 75px;
   padding-left: 155px;
   position: relative;
+}
+
+.reviews-list-loading,
+.reviews-load-failure {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.reviews-list-loading:after {
+  content: 'Загрузка...';
+}
+
+.reviews-load-failure:after {
+  content: '';
+  background: url('../img/icon-cross.png') no-repeat center;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
 }
 
 .review-load-failure .review-author {
@@ -367,11 +377,6 @@ input[type=radio]:checked + .review-mark-label {
 .review-form-field-name {
   width: 15em;
 }
-.review-form-field-name-wrong {
-  width: 15em;
-  border-color: red;
-  border: double;
-}
 
 .review-form-controls {
   white-space: nowrap;
@@ -401,6 +406,4 @@ input[type=radio]:checked + .review-mark-label {
 .review-fields-label {
   cursor: pointer;
   text-decoration: underline;
-}
-}
 }
