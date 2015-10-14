@@ -22,8 +22,13 @@
         'LOADING': 3,
         'DONE': 4
     };
-
+    console.log('start');
     var templateContainer = document.querySelector('.reviews-list');
+
+  //Добавляем класс invisible
+  var reviewsFilterAppear = document.getElementById('reviews-filter');
+  reviewsFilterAppear.classList.add('invisible');
+  console.log(reviewsFilterAppear);
 
     //Блок ошибки загрузки
     function showLoadFailure() {
@@ -72,10 +77,11 @@
     function loadReviews(callback) {
         var xhr = new XMLHttpRequest();
         xhr.timeout = 10000;
-        xhr.open('get', 'data/reviews.js');
+        xhr.open('get', 'data/reviews.json');
         xhr.send();
 
         xhr.onreadystatechange = function (evt) {
+          console.log('onready ok');
             var loadedXhr = evt.target;
 
             switch (loadedXhr.ReadyState) {
@@ -92,7 +98,6 @@
                     if (xhr.status === 200) {
                         var data = loadedXhr.response;
                         templateContainer.classList.remove('.pictures-loading');
-                        console.log(data);
                         callback(JSON.parse(data));
                     }
                     if (xhr.status > 400) {
@@ -108,8 +113,7 @@
         }
 
     }
-
-    //Рабочая функция фильтров
+    /**
     function workingFilters (reviews, filterid)
     {
         var filteredReviews = reviews.slice(0);
@@ -124,12 +128,13 @@
             case 'reviews-all':
             default:
         }
-    }
-
-    loadReviews(reviewsRender);
+    }**/
 
     //Возврат фильтров
     var reviewsFilterAppear = document.getElementById('reviews-filter');
     reviewsFilterAppear.classList.remove('invisible');
+    console.log(reviewsFilterAppear);
+
+  loadReviews(reviewsRender);
 
 })();
