@@ -22,13 +22,13 @@
         'LOADING': 3,
         'DONE': 4
     };
-    console.log('start');
     var templateContainer = document.querySelector('.reviews-list');
+    var reviews;
 
   //Добавляем класс invisible
-  var reviewsFilterAppear = document.getElementById('reviews-filter');
+  /**var reviewsFilterAppear = document.getElementById('reviews-filter');
   reviewsFilterAppear.classList.add('invisible');
-  console.log(reviewsFilterAppear);
+  console.log(reviewsFilterAppear, 'invis on');**/
 
     //Блок ошибки загрузки
     function showLoadFailure() {
@@ -37,12 +37,11 @@
 
     //Блок кода отвечающий за отрисовку комментариев
     function reviewsRender(reviewToRender) {
-
-        var reviewsFilter = document.getElementById('reviews-filter');
-        reviewsFilter.className = 'invisible';
+      templateContainer.classList.remove('hotels-list-failure');
+      templateContainer.innerHTML = '';
 
         var templateReview = document.getElementById('review-template');
-
+        console.log(reviewToRender);
         var reviewsFragment = document.createDocumentFragment();
         // Пробегаем по данным и отрисовываем
         reviewToRender.forEach(function (reviews) {
@@ -70,7 +69,11 @@
             }
 
         });
-        templateContainer.appendChild(reviewsFragment);
+
+      /**var reviewsFilterAppear = document.getElementById('reviews-filter');
+      reviewsFilterAppear.classList.remove('invisible');
+      console.log(reviewsFilterAppear, 'invis off');**/
+      templateContainer.appendChild(reviewsFragment);
     }
 
     //Грузим JSON файл
@@ -81,10 +84,9 @@
         xhr.send();
 
         xhr.onreadystatechange = function (evt) {
-          console.log('onready ok');
             var loadedXhr = evt.target;
 
-            switch (loadedXhr.ReadyState) {
+            switch (loadedXhr.readyState) {
                 case ReadyState.OPENED:
                 case ReadyState.HEADERS_RECEIVED:
                 case ReadyState.LOADING:
@@ -113,28 +115,133 @@
         }
 
     }
-    /**
-    function workingFilters (reviews, filterid)
+  //Функция инициализации фильтров
+  function initFilters()
+  {
+    var filtersContainer = document.querySelector('.reviews-filter');
+    for (var i = 0, l = filtersContainer.length; i < l; i++) {
+      filtersContainer.onclick = function (evt)
+      {
+        var clickedFilter = evt.target;
+        console.log(clickedFilter.value, '- это айди кнопки');
+        setActiveFilter(clickedFilter.value);
+      }
+    }
+
+  }
+
+  function setActiveFilter(filterID) {
+   var filteredReviews = workingFilters(reviews, filterID);
+    reviewsRender(filteredReviews);
+  }
+
+
+  //Функция работы фильтров
+    function workingFilters (reviews, filterID)
     {
         var filteredReviews = reviews.slice(0);
-        switch (filterid) {
+        switch (filterID) {
             case 'reviews-recent':
             {
-                filteredReviews.
+              filteredReviews = filteredReviews.sort(function(a, b)
+                {
+                  console.log('working recent');
+                  console.log(a.date);
+                  aa = new Date(a.date);
+                  console.log(aa);
+                  bb = new Date(b.date);
+                  console.log(bb);
+                  if (aa < bb)
+                  {
+                    return 1;
+                  }
+                  if (aa > bb) 
+                  {
+                    return -1;
+                  }
+                  if (aa === bb)
+                  {
+                    return 0;
+                  }
+                });
+                  break;
             }
             case 'reviews-good':
+            {
+              filteredReviews = filteredReviews.sort(function(a, b)
+              {
+                if (a.rating < b.rating)
+                {
+                  return 1;
+                }
+                if (a.rating > b.rating)
+                {
+                  return -1;
+                }
+                if (a.rating === b.rating)
+                {
+                  return 0;
+                }
+              });
+                break;
+            }
+
             case 'reviews-bad':
-            case 'reviews-popular':
-            case 'reviews-all':
+            {
+              filteredReviews = filteredReviews.sort(function(a, b)
+              {
+                if (a.rating > b.rating)
+                {
+                  return 1;
+                }
+                if (a.rating < b.rating)
+                {
+                  return -1;
+                }
+                if (a.rating === b.rating)
+                {
+                  return 0;
+                }
+              });
+              break;
+            }
+
+          case 'reviews-popular':
+          {
+            console.log('working popular');
+            filteredReviews = filteredReviews.sort(function(a, b)
+            {
+              if (a.review-rating > b.review-rating)
+              {
+                return 1;
+              }
+              if (a.review-rating < b.review-rating)
+              {
+                return -1;
+              }
+              if (a.review-rating === b.review-rating)
+              {
+                return 0;
+              }
+            });
+            break;
+          }
+
+          case 'reviews-all':
             default:
+            {
+              console.log('working all');
+              var filteredReviews = reviews.slice(0);
+              break;
+            }
         }
-    }**/
+      return(filteredReviews);
+    }
 
-    //Возврат фильтров
-    var reviewsFilterAppear = document.getElementById('reviews-filter');
-    reviewsFilterAppear.classList.remove('invisible');
-    console.log(reviewsFilterAppear);
-
-  loadReviews(reviewsRender);
+  initFilters();
+  loadReviews(function(loadedReviews) {
+    reviews = loadedReviews;
+    setActiveFilter('reviews-all');
+  });
 
 })();
