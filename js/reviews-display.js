@@ -145,17 +145,13 @@
             {
               filteredReviews = filteredReviews.sort(function(a, b)
                 {
-                  console.log('working recent');
-                  console.log(a.date);
                   aa = new Date(a.date);
-                  console.log(aa);
                   bb = new Date(b.date);
-                  console.log(bb);
                   if (aa < bb)
                   {
                     return 1;
                   }
-                  if (aa > bb) 
+                  if (aa > bb)
                   {
                     return -1;
                   }
@@ -208,7 +204,6 @@
 
           case 'reviews-popular':
           {
-            console.log('working popular');
             filteredReviews = filteredReviews.sort(function(a, b)
             {
               if (a.review-rating > b.review-rating)
@@ -230,7 +225,6 @@
           case 'reviews-all':
             default:
             {
-              console.log('working all');
               var filteredReviews = reviews.slice(0);
               break;
             }
